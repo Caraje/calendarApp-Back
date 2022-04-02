@@ -1,7 +1,9 @@
-const express = require('express')
-const { dbConnection } = require('./database/config')
-const cors = require('cors')
-require('dotenv').config()
+const express = require('express');
+require('dotenv').config();
+const cors = require('cors');
+const { dbConnection } = require('./database/config');
+
+
 /* 
     Crear servidor de express
     Crear un servidor: 
@@ -9,18 +11,19 @@ require('dotenv').config()
         Esta app, sera nuestro servidor, y en el podremos hacer los diferentes cambios que necesitemos.
 */
 
-const app = express()
+const app = express();
 
 
 // Base de datos: 
 
-dbConnection()
+dbConnection();
+
 
 /* 
 ======================================================================================================================================
 */
 
-app.use( cors() )
+app.use(cors())
 
 /* 
     Directorio Publico
@@ -29,7 +32,7 @@ app.use( cors() )
 
 */
 
-app.use( express.static('public'))
+app.use( express.static('public') );
 
 /* 
 ======================================================================================================================================
@@ -42,7 +45,7 @@ app.use( express.static('public'))
     
 */
 
-app.use( express.json())
+app.use( express.json() );
 
 /* 
 ======================================================================================================================================
@@ -61,8 +64,8 @@ app.use( express.json())
                     })
 */
 // En el caso de este curso, como haremos varias rutas, estas las crearemos en archivos adicionales. se pueden encontrar en la carpeta "routes"
-app.use('/api/auth', require('./routes/auth'))
-app.use('/api/events', require('./routes/events'))
+app.use('/api/auth', require('./routes/auth') );
+app.use('/api/events', require('./routes/events') );
 
 /*
     NOTA: para importar las rutas que crearemos en routes, hacemos uso del metodo ".use()", donde le pasaremos el path desde donde se accedra y seguido de la improtacion de donde esta el archico con un un require
@@ -76,9 +79,10 @@ app.use('/api/events', require('./routes/events'))
         Para que nuestro servidor, sea capaz de escuchar estas peticiones, o rutas debemos usar el metodo ".listen()" este metodo recibe primero un numero que sera el puerto que ocupara el servidor y tambien un callback, donde podremos establecer algunas opciones cuando se ejecuten estas rutas.
 */
 
-app.listen( process.env.PORT, ()=>{
-    console.log(`Servidor corriendo en el puerto ${ process.env.PORT }`)
-} )
+app.listen( process.env.PORT, () => {
+    console.log(`Servidor corriendo en puerto ${ process.env.PORT }`);
+});
+
 
 
 
