@@ -64,9 +64,8 @@ const crearUsuario = async (req, res = response ) => {
         if( usuario ) {
             return res.status(400).json({
                 ok: false,
-                uid: usuario.id, 
-                name: usuario.name
-            })
+                msg: 'El usuario ya existe'
+            });
         }
 /* 
     ================================================================================
